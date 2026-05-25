@@ -9,14 +9,28 @@ def get_player_pos():
 
         parts = user_input.split(",")
 
-        if len(parts) != 3:
+        # Önce syntax kontrolü
+        try:
+            parts[0]
+            parts[1]
+            parts[2]
+        except IndexError:
             print("Invalid syntax")
             continue
 
+        # Fazla eleman kontrolü
         try:
-            x = float(parts[0])
-            y = float(parts[1])
-            z = float(parts[2])
+            parts[3]
+            print("Invalid syntax")
+            continue
+        except IndexError:
+            pass
+
+        # Float conversion
+        try:
+            x = float(parts[0].strip())
+            y = float(parts[1].strip())
+            z = float(parts[2].strip())
 
             return (x, y, z)
 
@@ -25,12 +39,15 @@ def get_player_pos():
 
             for part in parts:
                 try:
-                    float(part)
+                    float(part.strip())
                 except ValueError:
                     invalid_value = part.strip()
                     break
 
-            print(f"Error on parameter '{invalid_value}': {error}")
+            print(
+                f"Error on parameter "
+                f"'{invalid_value}': {error}"
+            )
 
 
 print("=== Game Coordinate System ===")
@@ -53,7 +70,10 @@ distance_to_center = math.sqrt(
     + first_pos[2] ** 2
 )
 
-print(f"Distance to center: {round(distance_to_center, 4)}")
+print(
+    f"Distance to center: "
+    f"{round(distance_to_center, 4)}"
+)
 
 print("Get a second set of coordinates")
 second_pos = get_player_pos()
