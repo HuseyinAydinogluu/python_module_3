@@ -37,7 +37,7 @@ print("Item list:", item_list)
 
 total_quantity = sum(inventory.values())
 
-print(f"Total quantity of the {len(inventory)}items: {total_quantity}")
+print(f"Total quantity of the {len(inventory)} items: {total_quantity}")
 
 for item in inventory:
 
